@@ -41,13 +41,27 @@
   .hero-sub{font-size:17px;line-height:1.6;color:var(--text-2);max-width:46ch;margin-bottom:32px;}
   .hero-cta-row{display:flex;flex-direction:column;align-items:flex-start;gap:14px;}
   .hero-cta-note{font-size:13px;color:var(--text-3);}
-  #gsi-hero, #gsi-nav, #gsi-final{min-height:44px;}
-  .gsi-fallback{
+
+  .btn-google{
+    display:inline-flex;align-items:center;gap:12px;
+    background:#fff;color:#1f1f1f;border:1px solid #dadce0;
+    border-radius:100px;padding:12px 22px 12px 16px;
+    font-size:15px;font-weight:600;font-family:var(--font-body);
+    transition:box-shadow .15s ease,transform .15s ease,background .15s ease;
+  }
+  .btn-google:hover{box-shadow:0 2px 10px rgba(0,0,0,.18);transform:translateY(-1px);background:#f8f8f8;}
+  .btn-google:active{transform:translateY(0);}
+  .btn-google.filled{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .btn-google.filled:hover{background:var(--blue-hover);}
+  .btn-google.filled .g-icon-bg{fill:#fff;}
+  .btn-google-nav{padding:9px 16px 9px 12px;font-size:14px;}
+
+  .login-error{
     display:none;font-size:13.5px;color:var(--text-2);
     background:var(--surface-2);border:1px solid var(--border-soft);border-radius:12px;
-    padding:12px 16px;max-width:360px;line-height:1.5;
+    padding:12px 16px;max-width:380px;line-height:1.5;
   }
-  .gsi-fallback.show{display:block;}
+  .login-error.show{display:block;}
 
   /* ---- Hero visual ---- */
   .hero-visual{position:relative;height:380px;}
@@ -129,7 +143,7 @@
   .cta-band h2{color:#fff;font-size:clamp(26px,4vw,38px);margin-bottom:14px;}
   .cta-band p{color:#c8ccd6;font-size:15.5px;margin-bottom:30px;}
   .cta-band-inner{display:flex;flex-direction:column;align-items:center;gap:14px;}
-  .cta-band .gsi-fallback{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#c8ccd6;}
+  .cta-band .login-error{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#c8ccd6;}
 
   footer{
     padding:32px clamp(20px,5vw,64px) 48px;
@@ -157,7 +171,15 @@
     <a href="#cara-kerja">Cara Kerja</a>
   </nav>
   <div class="nav-cta">
-    <div id="gsi-nav"></div>
+    <button class="btn-google btn-google-nav" onclick="startGoogleLogin()">
+      <svg width="16" height="16" viewBox="0 0 18 18" aria-hidden="true">
+        <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.616z"/>
+        <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/>
+        <path fill="#FBBC05" d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z"/>
+        <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 7.294C4.672 5.167 6.656 3.58 9 3.58z"/>
+      </svg>
+      <span>Login</span>
+    </button>
   </div>
 </header>
 
@@ -171,8 +193,16 @@
       <h1>Catatan proyek yang tersusun sendiri, tanpa Anda mengetik apa pun.</h1>
       <p class="hero-sub">Forward foto lapangan, voice note, atau catatan singkat ke NotulArs. Semua otomatis tersusun rapi per proyek — siap jadi laporan, siap dicari, siap dikirim ke klien.</p>
       <div class="hero-cta-row">
-        <div id="gsi-hero"></div>
-        <div class="gsi-fallback" id="gsi-fallback-hero">Tombol Google belum bisa dimuat — pastikan domain ini sudah terdaftar di Google Cloud Console, atau nonaktifkan pemblokir skrip.</div>
+        <button class="btn-google" onclick="startGoogleLogin()">
+          <svg width="20" height="20" viewBox="0 0 18 18" aria-hidden="true">
+            <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.616z"/>
+            <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/>
+            <path fill="#FBBC05" d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z"/>
+            <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 7.294C4.672 5.167 6.656 3.58 9 3.58z"/>
+          </svg>
+          <span>Lanjutkan dengan Google</span>
+        </button>
+        <div class="login-error" id="login-error-hero"></div>
         <span class="hero-cta-note">Gratis untuk 1 proyek pertama. Tidak perlu kartu kredit.</span>
       </div>
     </div>
@@ -256,8 +286,16 @@
     <div class="cta-band-inner">
       <h2>Mulai dari proyek pertama Anda.</h2>
       <p>Masuk dengan akun Google — tidak perlu password baru untuk diingat.</p>
-      <div id="gsi-final"></div>
-      <div class="gsi-fallback" id="gsi-fallback-final">Tombol Google belum bisa dimuat — pastikan domain ini sudah terdaftar di Google Cloud Console, atau nonaktifkan pemblokir skrip.</div>
+      <button class="btn-google filled" onclick="startGoogleLogin()">
+        <svg width="20" height="20" viewBox="0 0 18 18" aria-hidden="true">
+          <path class="g-icon-bg" fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.616z"/>
+          <path class="g-icon-bg" fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/>
+          <path class="g-icon-bg" fill="#FBBC05" d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z"/>
+          <path class="g-icon-bg" fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 7.294C4.672 5.167 6.656 3.58 9 3.58z"/>
+        </svg>
+        <span>Lanjutkan dengan Google</span>
+      </button>
+      <div class="login-error" id="login-error-final"></div>
     </div>
   </section>
 </main>
@@ -275,7 +313,6 @@
   <p>© 2026 NotulArs. Prototipe internal.</p>
 </footer>
 
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
   const GOOGLE_CLIENT_ID = "236954718406-jt2mchqaktllrnh95c8ffgfho937cmja.apps.googleusercontent.com";
 
@@ -286,39 +323,66 @@
     return JSON.parse(json);
   }
 
-  function handleCredentialResponse(response){
+  function randomNonce(len){
+    const arr = new Uint8Array(len || 24);
+    crypto.getRandomValues(arr);
+    return Array.from(arr, b=>b.toString(16).padStart(2,'0')).join('');
+  }
+
+  function showLoginError(msg){
+    ['login-error-hero','login-error-final'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+    });
+  }
+
+  function startGoogleLogin(){
+    const nonce = randomNonce();
+    sessionStorage.setItem('notulars_nonce', nonce);
+    const redirectUri = window.location.origin + '/';
+    const params = new URLSearchParams({
+      client_id: GOOGLE_CLIENT_ID,
+      redirect_uri: redirectUri,
+      response_type: 'id_token',
+      scope: 'openid email profile',
+      nonce: nonce,
+      prompt: 'select_account'
+    });
+    window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?' + params.toString();
+  }
+
+  function checkAuthCallback(){
+    if(!location.hash || location.hash.indexOf('id_token') === -1) return;
+    const params = new URLSearchParams(location.hash.substring(1));
+    const idToken = params.get('id_token');
+    const error = params.get('error');
+    history.replaceState(null, '', location.pathname);
+
+    if(error){
+      showLoginError('Login Google dibatalkan atau gagal (' + error + '). Silakan coba lagi.');
+      return;
+    }
+    if(!idToken) return;
+
     try{
-      const payload = parseJwt(response.credential);
+      const payload = parseJwt(idToken);
+      const expectedNonce = sessionStorage.getItem('notulars_nonce');
+      sessionStorage.removeItem('notulars_nonce');
+      if(!expectedNonce || payload.nonce !== expectedNonce){
+        showLoginError('Verifikasi login gagal. Silakan coba masuk lagi.');
+        return;
+      }
       const user = { name: payload.name, email: payload.email, picture: payload.picture };
       localStorage.setItem('notulars_user', JSON.stringify(user));
       window.location.href = 'app.html';
     }catch(e){
       console.error('Gagal memproses login Google:', e);
+      showLoginError('Terjadi kesalahan saat memproses login Google.');
     }
   }
-
-  function initGoogleSignIn(){
-    if(!window.google || !window.google.accounts || !window.google.accounts.id){
-      ['gsi-fallback-hero','gsi-fallback-final'].forEach(id=>{
-        const el = document.getElementById(id);
-        if(el) el.classList.add('show');
-      });
-      return;
-    }
-    google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: handleCredentialResponse,
-      auto_select: false
-    });
-    const opts = { theme:'outline', size:'large', shape:'pill', text:'continue_with', width:280 };
-    google.accounts.id.renderButton(document.getElementById('gsi-hero'), opts);
-    google.accounts.id.renderButton(document.getElementById('gsi-final'), {...opts, theme:'filled_blue'});
-    google.accounts.id.renderButton(document.getElementById('gsi-nav'), { theme:'outline', size:'medium', shape:'pill', text:'signin', width:160 });
-  }
-
-  window.addEventListener('load', ()=>{
-    setTimeout(initGoogleSignIn, 300);
-  });
+  checkAuthCallback();
 
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click', e=>{

@@ -17,25 +17,25 @@ Semua data proyek/tangkapan/pencarian di dalam `app.js` masih **data dummy** unt
 
 ## Login dengan Google
 
-Login memakai **Google Identity Services** (`accounts.google.com/gsi/client`), bukan OAuth redirect klasik — jadi tidak perlu backend untuk proses login itu sendiri.
+Login memakai alur **OAuth 2.0 implicit flow lewat redirect penuh** (bukan popup, bukan Google Identity Services button) — dipilih setelah versi popup/GSI ternyata sering diblokir browser (`Failed to open popup window`). Dengan redirect, seluruh halaman pindah ke halaman resmi Google, lalu Google mengembalikan pengguna ke situs ini membawa ID token di URL fragment (`#id_token=...`). Tidak butuh backend.
 
 Client ID yang sudah dipasang di `index.html`:
 ```
 236954718406-jt2mchqaktllrnh95c8ffgfho937cmja.apps.googleusercontent.com
 ```
 
-**Wajib dilakukan sebelum login bisa berfungsi**, di [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials → pilih OAuth Client ID di atas → bagian **Authorized JavaScript origins**, tambahkan:
+**Wajib dilakukan sebelum login bisa berfungsi**, di [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials → pilih OAuth Client ID di atas, isi **dua** bagian ini (bukan cuma satu):
 
-- `http://localhost:PORT` (untuk tes lokal, lihat bagian "Menjalankan lokal" di bawah)
-- Domain hasil deploy nanti, misalnya `https://notulars.vercel.app` atau `https://notulars.netlify.app` (baru tahu setelah deploy pertama — tambahkan lalu tunggu 1-2 menit sebelum dicoba lagi)
+- **Authorized JavaScript origins** — tambahkan `http://localhost:PORT` dan domain deploy (misal `https://notul-ars.vercel.app`), tanpa trailing slash.
+- **Authorized redirect URIs** — tambahkan `http://localhost:PORT/` dan `https://notul-ars.vercel.app/`, **dengan** trailing slash `/` di akhir (kode ini selalu mengirim `redirect_uri` sebagai origin + `/`, harus persis sama).
 
-Tanpa origin yang terdaftar, tombol Google tidak akan muncul / akan menampilkan pesan error di halaman.
+Tunggu 1-2 menit setelah disimpan sebelum dicoba.
 
-Setelah login, data dari Google (nama, email, foto) diambil langsung dari ID token yang dikirim Google, disimpan di `localStorage`, lalu ditampilkan di tab **Profil**. Ini **belum diverifikasi di server** — cukup aman untuk prototipe, tapi untuk versi produksi sebaiknya token diverifikasi ulang lewat backend (endpoint `tokeninfo` Google atau library resmi) sebelum dipercaya penuh.
+Setelah login, data dari Google (nama, email, foto) diambil dari ID token yang dikembalikan Google di URL, disimpan di `localStorage`, lalu ditampilkan di tab **Profil**. Ini **belum diverifikasi di server** — cukup aman untuk prototipe (ada pengecekan `nonce` untuk mencegah replay dasar), tapi untuk versi produksi sebaiknya token diverifikasi ulang lewat backend (endpoint `tokeninfo` Google atau library resmi) sebelum dipercaya penuh.
 
 ## Menjalankan lokal
 
-Google Identity Services menolak berjalan di `file://` — harus lewat server lokal:
+Karena `redirect_uri` harus persis cocok dengan yang didaftarkan, jalankan lewat server lokal (bukan buka file HTML langsung) supaya originnya konsisten:
 
 ```bash
 # opsi 1: pakai Node (tanpa install apa pun)
@@ -45,7 +45,7 @@ npx serve .
 python -m http.server 8000
 ```
 
-Lalu buka `http://localhost:PORT`, dan pastikan origin tersebut sudah didaftarkan di Google Cloud Console (lihat di atas).
+Lalu buka `http://localhost:PORT/` (perhatikan trailing slash), dan pastikan origin + redirect URI-nya sudah didaftarkan di Google Cloud Console (lihat di atas).
 
 ## Deploy ke Vercel
 
@@ -63,7 +63,7 @@ netlify deploy --prod
 ```
 Atau drag folder `notulars/` ke [app.netlify.com/drop](https://app.netlify.com/drop).
 
-Setelah deploy, **jangan lupa** tambahkan domain barunya ke Authorized JavaScript origins di Google Cloud Console.
+Setelah deploy, **jangan lupa** tambahkan domain barunya ke Authorized JavaScript origins **dan** Authorized redirect URIs (dengan trailing slash) di Google Cloud Console.
 
 ## Yang masih dummy / belum tersambung
 
