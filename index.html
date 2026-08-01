@@ -80,11 +80,12 @@
   }
   .laptop-menubar{
     position:absolute;top:0;left:0;right:0;height:18px;z-index:2;
-    background:#eef0f3;display:flex;align-items:center;justify-content:space-between;padding:0 10px;
-    font:500 9.5px/1 var(--font-body);color:#333;
+    background:var(--surface);border-bottom:1px solid var(--border-soft);
+    display:flex;align-items:center;justify-content:space-between;padding:0 10px;
+    font:500 8.5px/1 var(--font-body);color:var(--text-2);
   }
   .laptop-menubar .mb-dots{display:flex;gap:4px;}
-  .laptop-menubar .mb-dots span{width:6px;height:6px;border-radius:50%;background:#c6c9ce;}
+  .laptop-menubar .mb-dots span{width:5px;height:5px;border-radius:50%;background:var(--border);}
   .laptop-iframe-wrap{position:absolute;top:18px;left:0;right:0;bottom:0;overflow:hidden;}
   .laptop-base{
     height:11px;background:linear-gradient(#2b2e33,#17191c);border-radius:0 0 7px 7px;position:relative;
@@ -104,16 +105,16 @@
     position:relative;width:100%;aspect-ratio:390/844;background:#000;border-radius:20px;overflow:hidden;
   }
   .phone-notch{
-    position:absolute;top:5px;left:50%;transform:translateX(-50%);
-    width:44%;height:14px;background:#000;border-radius:8px;z-index:3;
+    position:absolute;top:6px;left:50%;transform:translateX(-50%);
+    width:28%;height:12px;background:#000;border-radius:7px;z-index:3;
   }
   .phone-statusbar{
     position:absolute;top:0;left:0;right:0;height:22px;z-index:2;
-    background:#000;
-    display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 16px;
-    font:600 10px/1 var(--font-body);color:#fff;
+    background:var(--surface);border-bottom:1px solid var(--border-soft);
+    display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 11px;
+    font:600 8.5px/1 var(--font-body);color:var(--text);
   }
-  .phone-statusbar .ps-icons{display:flex;align-items:center;gap:3px;}
+  .phone-statusbar .ps-icons{display:flex;align-items:center;gap:3px;color:var(--text);}
   .phone-iframe-wrap{position:absolute;top:22px;left:0;right:0;bottom:0;overflow:hidden;}
 
   iframe.device-iframe{border:0;display:block;pointer-events:none;background:#fff;}
@@ -310,8 +311,8 @@
               <div class="phone-statusbar">
                 <span class="ps-clock" data-clock>09:41</span>
                 <span class="ps-icons">
-                  <svg width="13" height="9" viewBox="0 0 16 11" fill="none"><path d="M1 8.5c2-3 5-4.5 7-4.5s5 1.5 7 4.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>
-                  <svg width="16" height="10" viewBox="0 0 24 12" fill="none"><rect x="1" y="1" width="19" height="10" rx="2.5" stroke="#fff" stroke-width="1.2"/><rect x="3" y="3" width="13" height="6" rx="1" fill="#fff"/><rect x="21.5" y="4" width="1.6" height="4" rx="0.8" fill="#fff"/></svg>
+                  <svg width="12" height="8" viewBox="0 0 16 11" fill="none"><path d="M1 8.5c2-3 5-4.5 7-4.5s5 1.5 7 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                  <svg width="15" height="9" viewBox="0 0 24 12" fill="none"><rect x="1" y="1" width="19" height="10" rx="2.5" stroke="currentColor" stroke-width="1.2"/><rect x="3" y="3" width="13" height="6" rx="1" fill="currentColor"/><rect x="21.5" y="4" width="1.6" height="4" rx="0.8" fill="currentColor"/></svg>
                 </span>
               </div>
               <div class="phone-iframe-wrap" id="phone-iframe-wrap"></div>
