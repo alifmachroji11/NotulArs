@@ -70,6 +70,15 @@
     position:absolute;inset:0;
     transform:scale(1);transform-origin:top left;
   }
+  /* Below LAPTOP_NATURAL_WIDTH the laptop preview can't render at native
+     scale, and Chromium fails to rasterize a heavily-downscaled iframe of
+     that size (silent partial black paint) — so on narrow viewports we
+     show only the phone, centered, instead of shrinking the laptop. */
+  .device-showcase.phone-only .laptop-frame{display:none;}
+  .device-showcase.phone-only .phone-frame{
+    position:absolute;left:50%;top:50%;right:auto;bottom:auto;
+    transform:translate(-50%,-50%);
+  }
 
   .laptop-frame{position:absolute;left:0;top:16px;width:452px;}
   .laptop-top{
@@ -529,18 +538,23 @@
     const showcase = document.getElementById('device-showcase');
     if(!heroVisual || !showcase) return;
     const availableWidth = heroVisual.getBoundingClientRect().width;
-    const scale = Math.min(1, availableWidth / LAPTOP_NATURAL_WIDTH);
-    showcase.style.transform = `scale(${scale})`;
+    const canFitLaptop = availableWidth >= LAPTOP_NATURAL_WIDTH;
+    showcase.classList.toggle('phone-only', !canFitLaptop);
+    showcase.style.transform = canFitLaptop ? 'scale(1)' : 'none';
   }
 
   /* ---- Device mockups: laptop & phone showing the live landing page ---- */
   function mountDeviceMockups(){
     if(isEmbedPreview) return;
 
-    const devices = [
-      { wrapId:'laptop-iframe-wrap', w:1440 },
-      { wrapId:'phone-iframe-wrap', w:390 },
-    ];
+    const showcase = document.getElementById('device-showcase');
+    const phoneOnly = showcase && showcase.classList.contains('phone-only');
+    const devices = phoneOnly
+      ? [ { wrapId:'phone-iframe-wrap', w:390 } ]
+      : [
+          { wrapId:'laptop-iframe-wrap', w:1440 },
+          { wrapId:'phone-iframe-wrap', w:390 },
+        ];
     devices.forEach(d=>{
       const wrap = document.getElementById(d.wrapId);
       if(!wrap) return;
