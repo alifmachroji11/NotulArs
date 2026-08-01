@@ -349,7 +349,7 @@ function renderTimeline(){
   const items = project.captures.filter(c=> state.filterTag==='Semua' || c.tag===state.filterTag);
   const feed = document.getElementById('tl-feed');
   if(items.length===0){
-    feed.innerHTML = `<div class="feed-empty">Tidak ada tangkapan dengan tag ini.</div>`;
+    feed.innerHTML = `<div class="feed-empty">Belum ada tangkapan dengan tag ini.</div>`;
   } else {
     feed.innerHTML = items.map(renderCaptureCard).join('');
   }
@@ -445,7 +445,7 @@ function openReport(){
   const items = project.captures.filter(c=>c.daysAgo<=maxDays);
 
   document.getElementById('report-title').value = `Laporan Progres — ${project.name} (${RANGE_LABEL[state.reportRange]})`;
-  document.getElementById('report-summary').innerText = items.length ? buildSummary(project, items) : `Tidak ada tangkapan pada ${RANGE_LABEL[state.reportRange]}. Coba perluas rentang untuk menyusun laporan.`;
+  document.getElementById('report-summary').innerText = items.length ? buildSummary(project, items) : `Belum ada tangkapan di ${RANGE_LABEL[state.reportRange]}. Coba perluas rentangnya buat bikin laporan.`;
 
   const photos = items.filter(i=>i.type==='photo');
   const photoWrap = document.getElementById('report-photo-list');
@@ -696,7 +696,7 @@ function openSource(i){
         <div class="drive-doc-name">${ICON.drive} ${s.filename}</div>
         <div class="drive-doc-excerpt">${s.excerpt}</div>
       </div>
-      <button class="btn btn-secondary btn-block" onclick="showToast('Prototipe — versi asli akan membuka Google Drive.')">Buka File Asli</button>`;
+      <button class="btn btn-secondary btn-block" onclick="showToast('Ini baru prototipe — versi aslinya nanti bakal buka Google Drive beneran.')">Buka File Asli</button>`;
   }
   document.getElementById('source-overlay').classList.add('open');
 }
