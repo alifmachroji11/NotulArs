@@ -1,30 +1,22 @@
-/* NotulArs — manual light/dark theme toggle, shared by index.html & app.html */
+/* NotulArs — light/dark theme picker, shared by index.html & app.html
+   Default tampilan: light mode, kecuali pengguna sudah pernah memilih gelap. */
 (function () {
   var saved = localStorage.getItem('notulars_theme');
-  if (saved === 'light' || saved === 'dark') {
-    document.documentElement.setAttribute('data-theme', saved);
-  }
+  var initial = saved === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', initial);
 })();
 
-function isDarkActive() {
-  var forced = document.documentElement.getAttribute('data-theme');
-  if (forced === 'dark') return true;
-  if (forced === 'light') return false;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+function setTheme(mode) {
+  document.documentElement.setAttribute('data-theme', mode);
+  localStorage.setItem('notulars_theme', mode);
+  updateThemeSwitchUI();
 }
 
-function updateThemeToggleIcons() {
-  var dark = isDarkActive();
-  document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
-    btn.classList.toggle('is-dark', dark);
+function updateThemeSwitchUI() {
+  var current = document.documentElement.getAttribute('data-theme') || 'light';
+  document.querySelectorAll('[data-theme-opt]').forEach(function (btn) {
+    btn.classList.toggle('is-active', btn.getAttribute('data-theme-opt') === current);
   });
 }
 
-function toggleTheme() {
-  var next = isDarkActive() ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('notulars_theme', next);
-  updateThemeToggleIcons();
-}
-
-document.addEventListener('DOMContentLoaded', updateThemeToggleIcons);
+document.addEventListener('DOMContentLoaded', updateThemeSwitchUI);

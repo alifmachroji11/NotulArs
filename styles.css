@@ -165,15 +165,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .btn-ghost:hover{color:var(--text);background:var(--surface-2);}
 .btn[disabled]{opacity:.45;cursor:not-allowed;}
 
-/* ---------- Theme toggle ---------- */
-.theme-toggle{
-  width:40px;height:40px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--surface);border:1px solid var(--border-soft);color:var(--text-2);
-  transition:transform .15s ease,background .15s ease,color .15s ease;
+/* ---------- Theme switch (2 pilihan: light / dark) ---------- */
+.theme-switch{
+  display:inline-flex;align-items:center;gap:2px;flex-shrink:0;
+  background:var(--surface-2);border:1px solid var(--border-soft);border-radius:100px;padding:3px;
 }
-.theme-toggle:hover{background:var(--surface-2);color:var(--text);transform:translateY(-1px);}
-.theme-toggle:active{transform:translateY(0) scale(.96);}
-.theme-toggle .icon-moon{display:none;}
-.theme-toggle.is-dark .icon-sun{display:none;}
-.theme-toggle.is-dark .icon-moon{display:block;}
+.theme-opt{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-3);transition:background .15s ease,color .15s ease,transform .15s ease;
+}
+.theme-opt:hover{color:var(--text);transform:translateY(-1px);}
+.theme-opt:active{transform:translateY(0) scale(.94);}
+.theme-opt.is-active{background:var(--surface);color:var(--blue-hover);box-shadow:var(--shadow-1);}
