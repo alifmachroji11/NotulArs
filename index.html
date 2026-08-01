@@ -152,9 +152,50 @@
   }
   footer .logo-word{font-size:16px;}
   footer p{font-size:13px;color:var(--text-3);}
+
+  /* ---- Splash ---- */
+  #splash{
+    position:fixed;inset:0;z-index:1000;
+    background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .4s ease;
+  }
+  #splash.fade-out{opacity:0;pointer-events:none;}
+  .splash-logo{display:flex;flex-direction:column;align-items:center;gap:16px;}
+  .splash-mark{
+    opacity:0;transform:scale(.82);
+    animation:splashIn .55s cubic-bezier(.25,.8,.4,1) .1s forwards;
+  }
+  .splash-word{
+    font:600 26px/1 var(--font-display);letter-spacing:-.01em;color:var(--text);
+    opacity:0;transform:translateY(6px);
+    animation:splashWordIn .5s ease .32s forwards;
+  }
+  .splash-word .accent{color:var(--blue);}
+  @keyframes splashIn{
+    0%{opacity:0;transform:scale(.82);}
+    100%{opacity:1;transform:scale(1);}
+  }
+  @keyframes splashWordIn{
+    0%{opacity:0;transform:translateY(6px);}
+    100%{opacity:1;transform:translateY(0);}
+  }
+  body.is-loading{overflow:hidden;}
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+<div id="splash" aria-hidden="true">
+  <div class="splash-logo">
+    <svg class="logo-mark splash-mark" width="56" height="56" viewBox="0 0 100 100" aria-hidden="true">
+      <rect class="pole" x="24" y="18" width="12" height="64"></rect>
+      <rect class="pole" x="64" y="18" width="12" height="64"></rect>
+      <polygon class="flag" points="36,18 64,18 76,82 64,82"></polygon>
+      <rect class="band" x="24" y="46" width="52" height="8"></rect>
+    </svg>
+    <span class="splash-word">Notul<span class="accent">Ars</span></span>
+  </div>
+</div>
 
 <header class="nav">
   <a href="index.html" class="logo">
@@ -391,9 +432,20 @@
     });
   });
 
-  if(localStorage.getItem('notulars_user')){
-    window.location.href = 'app.html';
+  function finishSplash(){
+    const splash = document.getElementById('splash');
+    splash.classList.add('fade-out');
+    document.body.classList.remove('is-loading');
+    setTimeout(()=>{
+      splash.style.display = 'none';
+      if(localStorage.getItem('notulars_user')){
+        window.location.href = 'app.html';
+      }
+    }, 400);
   }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(finishSplash, reduceMotion ? 150 : 1150);
 </script>
 </body>
 </html>

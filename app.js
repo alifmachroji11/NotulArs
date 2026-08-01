@@ -19,35 +19,89 @@ function logout(){
   window.location.href = 'index.html';
 }
 
-/* ---------- Photo placeholder patterns (inline SVG, theme-aware) ---------- */
+/* ---------- Photo placeholder scenes (inline SVG illustrations, theme-aware) ---------- */
 const PATTERNS = {
-  tile: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="none">
+  /* Kamar mandi — pemasangan keramik */
+  bathroom: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
     <rect width="64" height="64" fill="var(--surface-2)"/>
-    <g stroke="${accent}" stroke-width="1" opacity=".55">
-      <path d="M0 16H64M0 32H64M0 48H64M16 0V64M32 0V64M48 0V64"/>
-    </g></svg>`,
-  brick: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="none">
+    <g stroke="${accent}" stroke-width="1" opacity=".4">
+      <path d="M0 9H64M0 18H64M0 27H64M0 36H64M12 0V44M24 0V44M36 0V44M48 0V44"/>
+    </g>
+    <line x1="0" y1="44" x2="64" y2="44" stroke="${accent}" stroke-width="1.5" opacity=".55"/>
+    <rect x="8" y="46" width="30" height="7" rx="3.5" fill="${accent}"/>
+    <ellipse cx="23" cy="49.5" rx="10" ry="2.8" fill="var(--surface-2)"/>
+    <rect x="18" y="40" width="10" height="6" rx="1.5" fill="none" stroke="${accent}" stroke-width="1.5"/>
+  </svg>`,
+  /* Pengecoran lantai / konstruksi beton */
+  concrete: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
     <rect width="64" height="64" fill="var(--surface-2)"/>
-    <g stroke="${accent}" stroke-width="1" opacity=".5">
-      <path d="M0 10H64M0 26H64M0 42H64M0 58H64M0 10V26M16 10V26M32 10V26M48 10V26M64 10V26M8 26V42M24 26V42M40 26V42M56 26V42M0 42V58M16 42V58M32 42V58M48 42V58M64 42V58"/>
-    </g></svg>`,
-  grain: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="none">
+    <polygon points="0,64 64,64 64,38 0,30" fill="${accent}" opacity=".16"/>
+    <line x1="0" y1="30" x2="64" y2="38" stroke="${accent}" stroke-width="1.5" opacity=".5"/>
+    <g stroke="${accent}" stroke-width="1" opacity=".25">
+      <path d="M8 46H24M32 50H48M14 58H30"/>
+    </g>
+    <g transform="translate(30,14) rotate(18)">
+      <path d="M0 0 L16 4 L14 10 L-2 6 Z" fill="${accent}"/>
+      <line x1="14" y1="10" x2="20" y2="18" stroke="${accent}" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+  </svg>`,
+  /* Jendela — posisi/ukuran kusen */
+  window: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
     <rect width="64" height="64" fill="var(--surface-2)"/>
-    <g stroke="${accent}" stroke-width="1" fill="none" opacity=".5">
-      <path d="M0 8 Q32 2 64 8"/><path d="M0 20 Q32 14 64 20"/><path d="M0 32 Q32 26 64 32"/>
-      <path d="M0 44 Q32 38 64 44"/><path d="M0 56 Q32 50 64 56"/>
-    </g></svg>`,
-  grid: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="none">
+    <rect x="14" y="8" width="36" height="36" fill="${accent}" opacity=".1"/>
+    <rect x="14" y="8" width="36" height="36" fill="none" stroke="${accent}" stroke-width="2.5"/>
+    <path d="M32 8V44M14 26H50" stroke="${accent}" stroke-width="1.8"/>
+    <rect x="10" y="44" width="44" height="4" rx="1.5" fill="${accent}" opacity=".8"/>
+    <rect x="10" y="48" width="44" height="3" rx="1.2" fill="${accent}" opacity=".4"/>
+  </svg>`,
+  /* Rak / etalase toko */
+  shelf: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
     <rect width="64" height="64" fill="var(--surface-2)"/>
-    <g stroke="${accent}" stroke-width="1" opacity=".45">
-      <path d="M0 0L64 64M64 0L0 64"/><circle cx="32" cy="32" r="14" fill="none"/>
-    </g></svg>`,
-  weave: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="none">
+    <g stroke="${accent}" stroke-width="2" opacity=".6">
+      <path d="M8 20H56M8 36H56M8 52H56"/>
+    </g>
+    <g fill="${accent}" opacity=".85">
+      <rect x="12" y="10" width="8" height="10" rx="1"/>
+      <rect x="23" y="8" width="7" height="12" rx="1"/>
+      <rect x="33" y="11" width="9" height="9" rx="1"/>
+      <rect x="45" y="9" width="7" height="11" rx="1"/>
+      <rect x="12" y="26" width="9" height="10" rx="1"/>
+      <rect x="25" y="24" width="8" height="12" rx="1"/>
+      <rect x="38" y="27" width="10" height="9" rx="1"/>
+      <rect x="16" y="42" width="10" height="10" rx="1"/>
+      <rect x="30" y="40" width="8" height="12" rx="1"/>
+      <rect x="42" y="43" width="9" height="9" rx="1"/>
+    </g>
+  </svg>`,
+  /* Lantai granit / ubin */
+  floor: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
     <rect width="64" height="64" fill="var(--surface-2)"/>
-    <g stroke="${accent}" stroke-width="1" opacity=".5">
-      <path d="M0 0V64M14 0V64M28 0V64M42 0V64M56 0V64"/>
-      <path d="M0 12H14M28 12H42M56 12H64M14 24H28M42 24H56M0 24H0M0 36H14M28 36H42M56 36H64M14 48H28M42 48H56"/>
-    </g></svg>`,
+    <g stroke="${accent}" stroke-width="1.5" opacity=".35">
+      <path d="M0 32H64M32 0V64"/>
+    </g>
+    <g stroke="${accent}" stroke-width="1" opacity=".2">
+      <path d="M0 16H64M0 48H64M16 0V64M48 0V64"/>
+    </g>
+    <polygon points="4,60 20,4 28,4 12,60" fill="${accent}" opacity=".15"/>
+  </svg>`,
+  /* Talang air / atap */
+  gutter: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+    <rect width="64" height="64" fill="var(--surface-2)"/>
+    <path d="M0 18L64 6V15L0 27Z" fill="${accent}" opacity=".6"/>
+    <rect x="44" y="15" width="7" height="36" rx="2" fill="${accent}" opacity=".85"/>
+    <path d="M44 51 Q47.5 60 51 51" stroke="${accent}" stroke-width="2.2" fill="none"/>
+    <circle cx="47.5" cy="57" r="2" fill="${accent}"/>
+    <circle cx="53" cy="60" r="1.4" fill="${accent}" opacity=".7"/>
+  </svg>`,
+  /* Partisi kaca */
+  partition: (accent) => `<svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+    <rect width="64" height="64" fill="var(--surface-2)"/>
+    <rect x="16" y="6" width="34" height="52" fill="${accent}" opacity=".1"/>
+    <rect x="16" y="6" width="34" height="52" fill="none" stroke="${accent}" stroke-width="2.2"/>
+    <rect x="12" y="4" width="42" height="4" rx="1.5" fill="${accent}" opacity=".8"/>
+    <rect x="46" y="28" width="3" height="9" rx="1.5" fill="${accent}"/>
+    <line x1="16" y1="58" x2="50" y2="58" stroke="${accent}" stroke-width="2" opacity=".5"/>
+  </svg>`,
 };
 function photoThumb(pattern, extraClass){
   return `<div class="capture-photo ${extraClass||''}">${PATTERNS[pattern]('var(--accent)')}
@@ -63,8 +117,8 @@ const ICON = {
   note: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4z"/></svg>`,
   clock: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
   chevronRight: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`,
-  drive: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 3h9l6 10.5-4.5 7.5h-12L1.5 13.5z"/><path d="M7.5 3L12 10.5M16.5 3L21 10.5M1.5 13.5h19.5"/></svg>`,
-  wa: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.6L3 20l1.1-5.3A8.5 8.5 0 1121 11.5z"/></svg>`,
+  drive: `<svg width="18" height="18" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg>`,
+  wa: `<svg width="18" height="18" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#25D366" d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.5 2.04 7.804L0 32l8.412-2.204A15.9 15.9 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0z"/><path fill="#fff" d="M23.3 19.1c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.6.2-.2.2-.4.3-.6.1-.2 0-.5 0-.7-.1-.2-.9-2.2-1.3-3-.3-.8-.7-.7-.9-.7h-.8c-.2 0-.6.1-.9.5-.3.4-1.2 1.1-1.2 2.7 0 1.6 1.2 3.2 1.4 3.4.2.2 2.4 3.6 5.8 5.1.8.3 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 2-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>`,
   camera: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
   search: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>`,
 };
@@ -72,34 +126,34 @@ const ICON = {
 /* ---------- Dummy data: Projects & captures ---------- */
 const projects = [
   {
-    id:'p1', name:'Rumah Bu Sari', client:'Bu Sari Wijaya', pattern:'tile',
+    id:'p1', name:'Rumah Bu Sari', client:'Bu Sari Wijaya', pattern:'bathroom',
     newCount:5, lastUpdateLabel:'2 jam lalu',
     captures:[
-      {id:'p1-c1', type:'photo', tag:'Progres', daysAgo:0, time:'Hari ini, 10.15', pattern:'tile', caption:'Pemasangan keramik kamar mandi utama — Roman Griya 30x60 abu muda, sudah 70% selesai.'},
+      {id:'p1-c1', type:'photo', tag:'Progres', daysAgo:0, time:'Hari ini, 10.15', pattern:'bathroom', caption:'Pemasangan keramik kamar mandi utama — Roman Griya 30x60 abu muda, sudah 70% selesai.'},
       {id:'p1-c2', type:'voice', tag:'Perlu Tindak Lanjut', daysAgo:0, time:'Hari ini, 09.40', transcript:'Bu, untuk posisi stop kontak di dapur ternyata kepentok kabinet gantung. Perlu digeser 15 cm ke kiri, mohon konfirmasi sebelum tukang lanjut pasang.'},
       {id:'p1-c3', type:'note', tag:'Revisi', daysAgo:1, time:'Kemarin, 16.20', text:'Klien minta warna cat ruang tamu diganti dari abu ke warna gading hangat. Sudah dikonfirmasi ke tukang cat, mulai Senin.'},
-      {id:'p1-c4', type:'photo', tag:'Progres', daysAgo:1, time:'Kemarin, 11.05', pattern:'grid', caption:'Pengecoran lantai 2 selesai, curing 7 hari sebelum lanjut pasang keramik.'},
+      {id:'p1-c4', type:'photo', tag:'Progres', daysAgo:1, time:'Kemarin, 11.05', pattern:'concrete', caption:'Pengecoran lantai 2 selesai, curing 7 hari sebelum lanjut pasang keramik.'},
       {id:'p1-c5', type:'voice', tag:'Progres', daysAgo:3, time:'3 hari lalu, 14.50', transcript:'Update pondasi sudah selesai semua, sekarang masuk tahap pasang bata di lantai 1, insya Allah 2 minggu selesai.'},
-      {id:'p1-c6', type:'photo', tag:'Revisi', daysAgo:5, time:'5 hari lalu, 08.30', pattern:'grid', caption:'Posisi jendela kamar tidur utama digeser 20 cm sesuai revisi gambar terakhir.'},
+      {id:'p1-c6', type:'photo', tag:'Revisi', daysAgo:5, time:'5 hari lalu, 08.30', pattern:'window', caption:'Posisi jendela kamar tidur utama digeser 20 cm sesuai revisi gambar terakhir.'},
       {id:'p1-c7', type:'note', tag:'Perlu Tindak Lanjut', daysAgo:7, time:'1 minggu lalu, 19.10', text:'Perlu tukang listrik tambahan — yang sekarang kewalahan kejar target minggu ini.'},
     ]
   },
   {
-    id:'p2', name:'Toko Pak Andi', client:'Pak Andi Kurniawan', pattern:'grain',
+    id:'p2', name:'Toko Pak Andi', client:'Pak Andi Kurniawan', pattern:'shelf',
     newCount:2, lastUpdateLabel:'Kemarin',
     captures:[
-      {id:'p2-c1', type:'photo', tag:'Progres', daysAgo:1, time:'Kemarin, 17.00', pattern:'grain', caption:'Rak display etalase depan sudah terpasang, tinggal finishing cat besi.'},
+      {id:'p2-c1', type:'photo', tag:'Progres', daysAgo:1, time:'Kemarin, 17.00', pattern:'shelf', caption:'Rak display etalase depan sudah terpasang, tinggal finishing cat besi.'},
       {id:'p2-c2', type:'note', tag:'Revisi', daysAgo:1, time:'Kemarin, 10.00', text:'Pak Andi minta tambah 1 titik lampu sorot di area kasir.'},
       {id:'p2-c3', type:'voice', tag:'Progres', daysAgo:3, time:'3 hari lalu, 13.20', transcript:'Lantai granit tile 60x60 warna abu tua sudah terpasang semua di area depan toko.'},
-      {id:'p2-c4', type:'photo', tag:'Perlu Tindak Lanjut', daysAgo:7, time:'1 minggu lalu, 09.00', pattern:'weave', caption:'Talang air belakang toko masih rembes, perlu dicek tukang sebelum plafon dipasang.'},
+      {id:'p2-c4', type:'photo', tag:'Perlu Tindak Lanjut', daysAgo:7, time:'1 minggu lalu, 09.00', pattern:'gutter', caption:'Talang air belakang toko masih rembes, perlu dicek tukang sebelum plafon dipasang.'},
     ]
   },
   {
-    id:'p3', name:'Klinik Medika', client:'dr. Ratna Puspita', pattern:'weave',
+    id:'p3', name:'Klinik Medika', client:'dr. Ratna Puspita', pattern:'partition',
     newCount:0, lastUpdateLabel:'4 hari lalu',
     captures:[
       {id:'p3-c1', type:'note', tag:'Progres', daysAgo:4, time:'4 hari lalu, 15.40', text:'Pengecatan dinding ruang tunggu selesai, warna hijau sage sesuai brief awal.'},
-      {id:'p3-c2', type:'photo', tag:'Progres', daysAgo:7, time:'1 minggu lalu, 11.15', pattern:'grid', caption:'Partisi kaca ruang periksa 1 dan 2 sudah terpasang.'},
+      {id:'p3-c2', type:'photo', tag:'Progres', daysAgo:7, time:'1 minggu lalu, 11.15', pattern:'partition', caption:'Partisi kaca ruang periksa 1 dan 2 sudah terpasang.'},
       {id:'p3-c3', type:'voice', tag:'Revisi', daysAgo:7, time:'1 minggu lalu, 08.50', transcript:'dr. Ratna minta plafon ruang tunggu pakai gypsum motif kayu, bukan polos putih seperti gambar awal.'},
     ]
   },
@@ -118,7 +172,7 @@ const searchEntries = [
         before:[{from:'Anda', text:'Piye kamar mandi utama, Pak? Update dong fotonya'}],
         match:{from:'Pak Wowo (Tukang)', text:'Ini pak, keramik Roman Griya 30x60 abu muda sudah kepasang 70%, tinggal bagian shower aja.'},
         after:[{from:'Anda', text:'Siap mantap, lanjut terus ya Pak 🙏'}]},
-      {type:'photo', project:'Rumah Bu Sari', date:'31 Jul 2026', pattern:'tile',
+      {type:'photo', project:'Rumah Bu Sari', date:'31 Jul 2026', pattern:'bathroom',
         caption:'Pemasangan keramik kamar mandi utama — Roman Griya 30x60 abu muda, sudah 70% selesai.'},
       {type:'drive', project:'Rumah Bu Sari', date:'2 Jun 2026', filename:'Spek Material Rumah Bu Sari — Rev 2.pdf',
         excerpt:'Kamar Mandi Utama — Keramik dinding & lantai: Roman Griya, seri Griya Series, ukuran 30x60 cm, warna Light Grey (kode RG-2140).'},
@@ -133,7 +187,7 @@ const searchEntries = [
         before:[{from:'Anda', text:'Lantai depan udah kelar semua Bang?'}],
         match:{from:'Bang Ujang (Tukang)', text:'Udah Kak, lantai granit 60x60 abu tua udah kelar dipasang semua di depan.'},
         after:[{from:'Anda', text:'Oke sip, nanti saya foto buat laporan ya'}]},
-      {type:'photo', project:'Toko Pak Andi', date:'29 Jul 2026', pattern:'grain',
+      {type:'photo', project:'Toko Pak Andi', date:'29 Jul 2026', pattern:'floor',
         caption:'Lantai granite tile 60x60 abu tua, area depan toko sudah terpasang penuh.'},
     ]
   },
@@ -155,7 +209,7 @@ const searchEntries = [
     keywords:['jendela','kusen','ukuran jendela','kamar tidur','aluminium'],
     answer:'Jendela kamar tidur utama Rumah Bu Sari memakai kusen aluminium ukuran 120×150 cm. Posisinya sempat digeser 20 cm sesuai revisi gambar terakhir.',
     sources:[
-      {type:'photo', project:'Rumah Bu Sari', date:'27 Jul 2026', pattern:'grid',
+      {type:'photo', project:'Rumah Bu Sari', date:'27 Jul 2026', pattern:'window',
         caption:'Posisi jendela kamar tidur utama digeser 20 cm sesuai revisi gambar terakhir.'},
       {type:'drive', project:'Rumah Bu Sari', date:'20 Jul 2026', filename:'Gambar Kerja Rumah Bu Sari — Rev 3.pdf',
         excerpt:'Kamar Tidur Utama — Jendela: kusen aluminium 120×150 cm, posisi digeser 20 cm ke arah taman sesuai revisi klien.'},
@@ -447,7 +501,7 @@ let newProjectAdded = false;
 function onboardingFinish(){
   closeOnboarding();
   if(!newProjectAdded){
-    projects.unshift({id:'p-new', name:'Proyek Baru', client:'Menunggu informasi…', pattern:'grid', newCount:0, lastUpdateLabel:'Baru saja', captures:[]});
+    projects.unshift({id:'p-new', name:'Proyek Baru', client:'Menunggu informasi…', pattern:'concrete', newCount:0, lastUpdateLabel:'Baru saja', captures:[]});
     newProjectAdded = true;
   }
   state.tab='proyek'; state.currentProjectId=null;
