@@ -71,9 +71,9 @@
     transform:scale(1);transform-origin:top center;
   }
 
-  .laptop-frame{
-    position:absolute;left:0;top:16px;width:452px;
-    border-radius:13px;overflow:hidden;box-shadow:var(--shadow-2);
+  .laptop-frame{position:absolute;left:0;top:16px;width:452px;}
+  .laptop-top{
+    border-radius:13px 13px 4px 4px;overflow:hidden;box-shadow:var(--shadow-2);
   }
   .laptop-bezel{
     background:#15171b;padding:8px 8px 0;
@@ -90,12 +90,22 @@
   .laptop-menubar .mb-dots{display:flex;gap:4px;}
   .laptop-menubar .mb-dots span{width:5px;height:5px;border-radius:50%;background:var(--border);}
   .laptop-iframe-wrap{position:absolute;top:18px;left:0;right:0;bottom:0;overflow:hidden;}
-  .laptop-base{
-    height:11px;background:linear-gradient(#2b2e33,#17191c);position:relative;
+  .laptop-hinge{
+    height:7px;background:linear-gradient(#2b2e33,#17191c);
   }
-  .laptop-base::after{
-    content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);
-    width:56px;height:4px;background:#0b0c0e;border-radius:0 0 5px 5px;
+  .laptop-deck{
+    width:466px;margin-left:-7px;height:28px;position:relative;
+    background:linear-gradient(180deg,#3d4045,#25272c);
+    border-radius:0 0 11px 11px;
+    box-shadow:0 8px 16px -8px rgba(0,0,0,.45);
+  }
+  .laptop-keys-hint{
+    position:absolute;top:6px;left:13%;right:13%;height:11px;
+    background:rgba(0,0,0,.24);border-radius:3px;
+  }
+  .laptop-trackpad{
+    position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
+    width:62px;height:5px;background:rgba(255,255,255,.08);border-radius:3px;
   }
 
   .phone-frame{
@@ -295,16 +305,22 @@
     <div class="hero-visual">
       <div class="device-showcase" id="device-showcase">
         <div class="laptop-frame">
-          <div class="laptop-bezel">
-            <div class="laptop-screen">
-              <div class="laptop-menubar">
-                <div class="mb-dots"><span></span><span></span><span></span></div>
-                <span class="mb-clock" data-clock>09:41</span>
+          <div class="laptop-top">
+            <div class="laptop-bezel">
+              <div class="laptop-screen">
+                <div class="laptop-menubar">
+                  <div class="mb-dots"><span></span><span></span><span></span></div>
+                  <span class="mb-clock" data-clock>09:41</span>
+                </div>
+                <div class="laptop-iframe-wrap" id="laptop-iframe-wrap"></div>
               </div>
-              <div class="laptop-iframe-wrap" id="laptop-iframe-wrap"></div>
             </div>
+            <div class="laptop-hinge"></div>
           </div>
-          <div class="laptop-base"></div>
+          <div class="laptop-deck">
+            <div class="laptop-keys-hint"></div>
+            <div class="laptop-trackpad"></div>
+          </div>
         </div>
 
         <div class="phone-frame">
@@ -512,19 +528,20 @@
     if(isEmbedPreview) return;
 
     const devices = [
-      { wrapId:'laptop-iframe-wrap', w:1440, h:864 },
-      { wrapId:'phone-iframe-wrap', w:390, h:844 },
+      { wrapId:'laptop-iframe-wrap', w:1440 },
+      { wrapId:'phone-iframe-wrap', w:390 },
     ];
     devices.forEach(d=>{
       const wrap = document.getElementById(d.wrapId);
       if(!wrap) return;
       const rect = wrap.getBoundingClientRect();
       const scale = rect.width / d.w;
+      const h = Math.round(rect.height / scale);
       const scaler = document.createElement('div');
-      scaler.style.cssText = `width:${d.w}px;height:${d.h}px;transform:scale(${scale});transform-origin:top left;`;
+      scaler.style.cssText = `width:${d.w}px;height:${h}px;transform:scale(${scale});transform-origin:top left;`;
       const iframe = document.createElement('iframe');
       iframe.className = 'device-iframe';
-      iframe.width = d.w; iframe.height = d.h;
+      iframe.width = d.w; iframe.height = h;
       iframe.tabIndex = -1;
       iframe.setAttribute('aria-hidden','true');
       iframe.src = 'index.html?embed=1';
