@@ -65,10 +65,10 @@
   .login-error.show{display:block;}
 
   /* ---- Hero visual: device mockups ---- */
-  .hero-visual{position:relative;height:360px;}
+  .hero-visual{position:relative;height:360px;overflow:hidden;}
   .device-showcase{
     position:absolute;inset:0;
-    transform:scale(1);transform-origin:top center;
+    transform:scale(1);transform-origin:top left;
   }
 
   .laptop-frame{position:absolute;left:0;top:16px;width:452px;}
@@ -136,7 +136,6 @@
 
   @media (max-width:640px){
     .hero-visual{height:300px;}
-    .device-showcase{transform:scale(.82);}
   }
 
   :root.is-embed-preview .hero{grid-template-columns:1fr;}
@@ -523,6 +522,17 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   setTimeout(finishSplash, isEmbedPreview ? 0 : (reduceMotion ? 150 : 1150));
 
+  /* ---- Scale the laptop+phone showcase to always fit inside .hero-visual ---- */
+  const LAPTOP_NATURAL_WIDTH = 452;
+  function fitDeviceShowcase(){
+    const heroVisual = document.querySelector('.hero-visual');
+    const showcase = document.getElementById('device-showcase');
+    if(!heroVisual || !showcase) return;
+    const availableWidth = heroVisual.getBoundingClientRect().width;
+    const scale = Math.min(1, availableWidth / LAPTOP_NATURAL_WIDTH);
+    showcase.style.transform = `scale(${scale})`;
+  }
+
   /* ---- Device mockups: laptop & phone showing the live landing page ---- */
   function mountDeviceMockups(){
     if(isEmbedPreview) return;
@@ -584,9 +594,11 @@
   }
 
   if(!isEmbedPreview){
+    fitDeviceShowcase();
     mountDeviceMockups();
     updateClocks();
     setInterval(updateClocks, 15000);
+    window.addEventListener('resize', fitDeviceShowcase);
   }
 </script>
 </body>
