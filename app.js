@@ -457,16 +457,16 @@ function openReport(){
 
   document.getElementById('report-overlay').classList.add('open');
 }
-function closeReport(){
+function hideReportOverlay(){
   document.getElementById('report-overlay').classList.remove('open');
 }
-function saveReportDraft(){
-  closeReport();
+function closeReport(){
+  hideReportOverlay();
   showToast('Draf laporan tersimpan.');
 }
 function shareToClient(){
   showToast('Menyiapkan PDF laporan…');
-  setTimeout(()=>{ closeReport(); showToast('Laporan PDF siap dibagikan.'); }, 1200);
+  setTimeout(()=>{ hideReportOverlay(); showToast('Laporan PDF siap dibagikan.'); }, 1200);
 }
 
 /* ============================================================
