@@ -185,6 +185,45 @@
   .step h3{font-size:18px;margin-bottom:8px;}
   .step p{font-size:14.5px;color:var(--text-2);line-height:1.6;}
 
+  /* ---- Cerita nyata (case study) ---- */
+  .case-grid{display:grid;grid-template-columns:1fr;gap:24px;}
+  @media (min-width:860px){ .case-grid{grid-template-columns:1.05fr 1fr;align-items:start;} }
+  .case-card{
+    background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-lg);
+    padding:32px;box-shadow:var(--shadow-1);
+  }
+  .case-quote{font:500 20px/1.55 var(--font-display);color:var(--text);margin:0 0 24px;}
+  .case-person{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+  .case-avatar{
+    width:44px;height:44px;border-radius:50%;background:var(--blue-tint);color:var(--blue-hover);
+    display:flex;align-items:center;justify-content:center;font:600 15px var(--font-display);flex-shrink:0;
+  }
+  .case-person-name{font-weight:600;font-size:14.5px;}
+  .case-person-role{font-size:13px;color:var(--text-3);margin-top:2px;}
+  .case-stats{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding-top:24px;border-top:1px solid var(--border-soft);}
+  .case-stat-value{font:700 21px var(--font-display);color:var(--text);margin-bottom:4px;}
+  .case-stat-value.accent{color:var(--blue);}
+  .case-stat-value.moss{color:oklch(0.5 0.1 155);}
+  .case-stat-value .unit{font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--text-3);}
+  .case-stat-label{font-size:12.5px;color:var(--text-2);line-height:1.4;}
+
+  .case-timeline-date{font-size:13px;color:var(--text-3);margin:0 0 16px;}
+  .case-timeline{
+    background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-lg);
+    padding:8px 24px;box-shadow:var(--shadow-1);
+  }
+  .case-tl-item{padding:16px 0;border-bottom:1px solid var(--border-soft);}
+  .case-tl-item:last-child{border-bottom:none;}
+  .case-tl-when{font-size:12.5px;font-weight:600;color:var(--text-3);margin-bottom:6px;}
+  .case-tl-what{font-size:14px;color:var(--text-2);line-height:1.6;}
+  .case-tl-what.case-tl-note{color:var(--text-2);font-style:italic;}
+  .case-tl-tag{
+    display:inline-flex;align-items:center;font-size:11px;font-weight:600;
+    padding:3px 10px;border-radius:100px;margin-right:9px;vertical-align:2px;
+  }
+  .case-tl-tag.progres{background:var(--tag-progres-bg);color:var(--tag-progres-text);}
+  .case-tl-tag.revisi{background:var(--tag-revisi-bg);color:var(--tag-revisi-text);}
+
   /* ---- Final CTA ---- */
   .cta-band{
     background:var(--ink);color:#F2F1EC;border-radius:28px;
@@ -265,6 +304,7 @@
   <nav class="nav-links">
     <a href="#fitur">Fitur</a>
     <a href="#cara-kerja">Cara Kerja</a>
+    <a href="#cerita">Cerita Nyata</a>
   </nav>
   <div class="nav-cta">
     <div class="theme-switch" role="group" aria-label="Pilih tampilan">
@@ -353,7 +393,7 @@
     <div class="section-head">
       <div class="section-label">Dua hal, satu alur kerja</div>
       <h2>Catatan yang rapi sendiri, jawaban yang tinggal ditanya.</h2>
-      <p>NotulArs punya dua peran: merapikan semua tangkapan dari lapangan secara otomatis, dan jadi tempat nyari yang tenang di antara tumpukan chat, dokumen, dan foto.</p>
+      <p>NotulArs punya dua peran: merapikan semua tangkapan dari lapangan otomatis, dan jadi tempat nyari yang tenang di antara tumpukan chat, dokumen, dan foto.</p>
     </div>
     <div class="pillars">
       <div class="pillar">
@@ -384,23 +424,82 @@
   <section class="section" id="cara-kerja">
     <div class="section-head">
       <div class="section-label">Cara Kerja</div>
-      <h2>Tiga langkah, terus biar NotulArs yang kerja.</h2>
+      <h2>Tiga langkah aja, sisanya biar NotulArs yang beresin.</h2>
+      <p>Nggak ada pelatihan tim, nggak ada aplikasi baru buat klien atau tukang. Yang berubah cuma satu nomor tujuan forward.</p>
     </div>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
-        <h3>Hubungkan nomor WhatsApp</h3>
-        <p>Simpan nomor bot NotulArs, terus forward pesan atau tambahin ke grup proyek kamu.</p>
+        <h3>Forward seperti biasa</h3>
+        <p>Simpan nomor NotulArs, terus forward foto, voice note, atau catatan revisi ke sana — sama kayak forward ke rekan kerja.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <h3>Semua rapi sendiri</h3>
-        <p>Foto, voice note, dan catatan otomatis masuk ke linimasa proyek yang tepat — kamu nggak perlu ngetik ulang apa-apa.</p>
+        <h3>NotulArs baca &amp; rapiin</h3>
+        <p>Tiap tangkapan otomatis masuk ke proyek yang tepat, ditandai progres, revisi, atau perlu tindak lanjut — kamu nggak perlu susun manual.</p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <h3>Buat laporan atau tanya langsung</h3>
-        <p>Susun laporan dari rentang tanggal mana aja, atau tanya "Ingat" buat jawaban instan lengkap dengan rujukannya.</p>
+        <h3>Laporan tinggal kirim</h3>
+        <p>Pilih rentang tanggal, draf laporan udah tersusun lengkap sama ringkasan dan foto pilihan. Edit dikit, kirim ke klien.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section case" id="cerita">
+    <div class="section-head">
+      <div class="section-label">Contoh Nyata</div>
+      <h2>Malam Minggu yang balik lagi jadi milik Alif.</h2>
+    </div>
+    <div class="case-grid">
+      <div class="case-card">
+        <p class="case-quote">&ldquo;Dulu tiap malam Minggu saya duduk dua jam nyusun ulang chat dari tiga proyek sekaligus. Sekarang saya buka NotulArs, laporannya udah setengah jadi — saya tinggal baca ulang lima menit.&rdquo;</p>
+        <div class="case-person">
+          <div class="case-avatar">AM</div>
+          <div>
+            <div class="case-person-name">Alif Machroji</div>
+            <div class="case-person-role">Arsitek praktik mandiri, Bandung — 3 proyek renovasi rumah tinggal berjalan</div>
+          </div>
+        </div>
+        <div class="case-stats">
+          <div class="case-stat">
+            <div class="case-stat-value accent">2 jam &rarr; 5 menit</div>
+            <div class="case-stat-label">Waktu susun laporan mingguan</div>
+          </div>
+          <div class="case-stat">
+            <div class="case-stat-value">&plusmn;180<span class="unit"> /minggu</span></div>
+            <div class="case-stat-label">Pesan WhatsApp dari 3 proyek</div>
+          </div>
+          <div class="case-stat">
+            <div class="case-stat-value moss">0</div>
+            <div class="case-stat-label">Revisi lisan yang kelewat, 3 bulan terakhir</div>
+          </div>
+          <div class="case-stat">
+            <div class="case-stat-value">14 hari</div>
+            <div class="case-stat-label">Dari coba-coba sampai jadi kebiasaan tim</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="case-timeline-date">Selasa, 14 Mei — proyek Rumah Bu Sari</p>
+        <div class="case-timeline">
+          <div class="case-tl-item">
+            <div class="case-tl-when">09.12</div>
+            <div class="case-tl-what"><span class="case-tl-tag progres">Progres</span>Tukang forward foto: keramik teras selesai dipasang.</div>
+          </div>
+          <div class="case-tl-item">
+            <div class="case-tl-when">11.40</div>
+            <div class="case-tl-what"><span class="case-tl-tag revisi">Revisi</span>Klien minta warna pagar diganti jadi hijau tua.</div>
+          </div>
+          <div class="case-tl-item">
+            <div class="case-tl-when">16.05</div>
+            <div class="case-tl-what"><span class="case-tl-tag progres">Progres</span>Voice note dari lokasi: pondasi carport selesai dicor.</div>
+          </div>
+          <div class="case-tl-item">
+            <div class="case-tl-when">Kamis</div>
+            <div class="case-tl-what case-tl-note">Alif buka NotulArs, semua tangkapan minggu ini udah rapi tersusun. Laporan siap dikirim dalam lima menit.</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
