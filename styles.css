@@ -26,6 +26,7 @@
   --border:oklch(0.90 0.006 260);
   --border-soft:oklch(0.935 0.005 260);
   --logo-pole:var(--ink);
+  --logo-accent:oklch(0.5 0.16 258);
   --tag-progres-bg:oklch(0.94 0.03 155);
   --tag-progres-text:oklch(0.42 0.08 155);
   --tag-revisi-bg:oklch(0.94 0.05 80);
@@ -56,6 +57,7 @@
     --blue-tint:oklch(0.30 0.06 44);
     --blue-on:oklch(0.16 0.012 260);
     --logo-pole:#F2F1EC;
+    --logo-accent:oklch(0.72 0.13 258);
     --tag-progres-bg:oklch(0.28 0.04 155);
     --tag-progres-text:oklch(0.78 0.09 155);
     --tag-revisi-bg:oklch(0.30 0.05 80);
@@ -82,6 +84,7 @@
   --blue-tint:oklch(0.30 0.06 44);
   --blue-on:oklch(0.16 0.012 260);
   --logo-pole:#F2F1EC;
+  --logo-accent:oklch(0.72 0.13 258);
   --tag-progres-bg:oklch(0.28 0.04 155);
   --tag-progres-text:oklch(0.78 0.09 155);
   --tag-revisi-bg:oklch(0.30 0.05 80);
@@ -106,6 +109,7 @@
   --border:oklch(0.90 0.006 260);
   --border-soft:oklch(0.935 0.005 260);
   --logo-pole:var(--ink);
+  --logo-accent:oklch(0.5 0.16 258);
   --tag-progres-bg:oklch(0.94 0.03 155);
   --tag-progres-text:oklch(0.42 0.08 155);
   --tag-revisi-bg:oklch(0.94 0.05 80);
@@ -143,10 +147,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 /* ---------- Logo ---------- */
 .logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;}
 .logo-mark rect.pole{fill:var(--logo-pole);}
-.logo-mark .flag{fill:var(--blue);}
-.logo-mark .band{fill:var(--blue);opacity:.82;}
+.logo-mark .flag{fill:var(--logo-accent);}
+.logo-mark .band{fill:var(--logo-accent);opacity:.82;}
 .logo-word{font:600 22px/1 var(--font-display);letter-spacing:-.01em;color:var(--text);}
-.logo-word .accent{color:var(--blue);}
+.logo-word .accent{color:var(--logo-accent);}
 
 /* ---------- Buttons ---------- */
 .btn{

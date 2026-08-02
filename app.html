@@ -259,13 +259,6 @@ body{ overflow-x:hidden; }
 .report-photo-cap:focus{outline:none;border:1px dashed var(--accent);background:var(--surface);}
 .report-empty-note{font-size:14px;color:var(--text-3);padding:20px;text-align:center;}
 
-.share-sheet-option{
-  display:flex;align-items:center;gap:14px;width:100%;padding:14px;border-radius:14px;
-  border:1px solid var(--border-soft);margin-bottom:10px;text-align:left;transition:background .15s;
-}
-.share-sheet-option:hover{background:var(--surface-2);}
-.share-opt-icon{width:38px;height:38px;border-radius:10px;background:var(--accent-tint);color:var(--accent-hover);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-
 /* ===== Cari — Inter only, calm ===== */
 .cari-topbar{position:sticky;top:0;z-index:20;background:var(--bg);padding:16px 20px 10px;}
 .cari-topbar-row{display:flex;align-items:center;gap:10px;}
@@ -597,7 +590,7 @@ body{ overflow-x:hidden; }
       <div class="report-doc">
         <div class="report-actions">
           <button class="btn btn-secondary" onclick="saveReportDraft()">Simpan sebagai Draf</button>
-          <button class="btn btn-primary" onclick="openShareSheet()">
+          <button class="btn btn-primary" onclick="shareToClient()">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
             Bagikan ke Klien
           </button>
@@ -611,26 +604,6 @@ body{ overflow-x:hidden; }
         <div class="report-section-label">Foto terpilih</div>
         <div class="report-photo-list" id="report-photo-list"></div>
       </div>
-    </div>
-  </div>
-
-  <div class="overlay" id="share-sheet">
-    <div class="overlay-panel">
-      <div class="overlay-grip"></div>
-      <div class="overlay-header">
-        <span class="overlay-title">Bagikan Laporan</span>
-        <button class="icon-btn overlay-close" onclick="closeShareSheet()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
-      </div>
-      <button class="share-sheet-option" onclick="doShare('pdf')">
-        <span class="share-opt-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l5 5v13a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M9 13h6M9 17h6"/></svg></span>
-        <span><div class="fab-card-title">Ekspor sebagai PDF</div><div class="fab-card-sub">Siap dicetak atau dilampirkan email</div></span>
-      </button>
-      <button class="share-sheet-option" onclick="doShare('wa')">
-        <span class="share-opt-icon" style="background:#DCF3D2;"><svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path fill="#25D366" d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.5 2.04 7.804L0 32l8.412-2.204A15.9 15.9 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0z"/><path fill="#fff" d="M23.3 19.1c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.6.2-.2.2-.4.3-.6.1-.2 0-.5 0-.7-.1-.2-.9-2.2-1.3-3-.3-.8-.7-.7-.9-.7h-.8c-.2 0-.6.1-.9.5-.3.4-1.2 1.1-1.2 2.7 0 1.6 1.2 3.2 1.4 3.4.2.2 2.4 3.6 5.8 5.1.8.3 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 2-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg></span>
-        <span><div class="fab-card-title">Kirim via WhatsApp</div><div class="fab-card-sub">Langsung ke chat dengan klien</div></span>
-      </button>
     </div>
   </div>
 

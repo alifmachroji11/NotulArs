@@ -464,13 +464,9 @@ function saveReportDraft(){
   closeReport();
   showToast('Draf laporan tersimpan.');
 }
-function openShareSheet(){ document.getElementById('share-sheet').classList.add('open'); }
-function closeShareSheet(){ document.getElementById('share-sheet').classList.remove('open'); }
-function doShare(kind){
-  closeShareSheet();
-  if(kind==='pdf'){ showToast('Menyiapkan PDF laporan…'); }
-  else { showToast('Membuka WhatsApp untuk mengirim ke klien…'); }
-  setTimeout(()=>{ closeReport(); showToast('Laporan siap dibagikan.'); }, 1200);
+function shareToClient(){
+  showToast('Menyiapkan PDF laporan…');
+  setTimeout(()=>{ closeReport(); showToast('Laporan PDF siap dibagikan.'); }, 1200);
 }
 
 /* ============================================================
